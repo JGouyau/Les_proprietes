@@ -20,106 +20,78 @@ namespace Encapsulation
             Door houseDoor = new Door();
             Door roomDoor = new Door();
             
-            house.door = houseDoor;
-            room.door = roomDoor;
-            house.room = room;
+            house.AddDoor(houseDoor);
+            room.AddDoor(roomDoor);
+            house.AddRoom(room);
 
-            //house.AddDoor(houseDoor);
-            //room.AddDoor(roomDoor);
-            //house.AddRoom(room);
         }
     }
 
     public class House
     {
-        private List<Room> _rooms;
-        private List<Door> _doors;
-
-
          public House()
         {
-            _rooms = new List<Room>();
-            _doors = new List<Door>();
+            Rooms = new List<Room>();
+            Doors = new List<Door>();
         }
 
-        public Door door
-        { 
-            set { _doors.Add(value); }
-        }
+        public List<Door> Doors {get; }
 
-        public Room room
+        public List<Room> Rooms { get; }
+
+        public void AddDoor(Door door)
         {
-            set { _rooms.Add(value); }
+            Doors.Add(door);
         }
-
-
-        //public void AddDoor(Door door)
-        //{
-        //    _doors.Add(door);
-        //}
-
-        //public void AddRoom(Room room)
-        //{
-        //    _rooms.Add(room);
-        //}
+        public void AddRoom(Room room)
+        {
+            Rooms.Add(room);
+        }
     }
 
     public class Room
     {
-        private List<Door> _doors;
-
         public Room()
         {
-            _doors = new List<Door>();
+            Doors = new List<Door>();
         }
-
-        public Door door
+        public List<Door> Doors {  get;  }
+        public void AddDoor(Door door)
         {
-            set { _doors.Add(value); }
+            Doors.Add(door);
         }
-        //public void AddDoor(Door door)
-        //{
-        //    _doors.Add(door);
-        //}
-    }
+}
 
     public class Door
     {
-        private bool _isOpen;
+         public Door()
+         {
+            IsOpen = false;
+         }
 
-        public Door()
-        {
-            _isOpen = false;
-        }
-
-        public bool IsOpen
-        {
-            get { return _isOpen; }
-            set { _isOpen = value; }
-        }
-
+        public bool IsOpen { get ; set; }
 
         public void Open()
         {
-            if (_isOpen)
+            if (IsOpen)
             {
                 Console.WriteLine("Door already opened. Ain't done anything.");
             }
             else
             {
-                _isOpen = true;
+                IsOpen = true;
             }
         }
 
         public void Close()
         {
-            if (!_isOpen)
+            if (!IsOpen)
             {
                 Console.WriteLine("Door already closed. Ain't done anything.");
             }
             else
             {
-                _isOpen = false;
+                IsOpen = false;
             }
         }
     }
